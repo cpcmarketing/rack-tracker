@@ -1,9 +1,12 @@
 <% if events.any? %>
-<script type='text/javascript' src='//static.criteo.net/js/ld/ld.js' async='true'></script>
+<script
+  type="text/javascript"
+  src="//dynamic.criteo.com/js/ld/ld.js?a=107027"
+  async="true"
+  data-turbo-eval="false"
+></script>
 <script type='text/javascript'>
 window.criteo_q = window.criteo_q || [];
-<% (tracker_events + events).each do |event| %>
-window.criteo_q.push(<%= event.write %>);
-<% end %>
+window.criteo_q.push(<% (tracker_events + events).each do |event| %><%= event.write %>,<% end %>);
 </script>
 <% end %>
