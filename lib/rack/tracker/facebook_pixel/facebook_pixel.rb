@@ -18,6 +18,12 @@ class Rack::Tracker::FacebookPixel < Rack::Tracker::Handler
     end
   end
 
+  class Init < Event
+    def name
+      'init'
+    end
+  end
+
   class Track < Event
     def name
       'track'
