@@ -5,8 +5,14 @@
   async="true"
   data-turbo-eval="false"
 ></script>
-<script type='text/javascript'>
-window.criteo_q = window.criteo_q || [];
-window.criteo_q.push(<% (tracker_events + events).each do |event| %><%= event.write %>,<% end %>);
+<script type="text/javascript">
+<% if turbo_event? %>
+  document.addEventListener(<%= turbo_event %>, function(e) {
+<% end %>
+    window.criteo_q = window.criteo_q || [];
+    window.criteo_q.push(<% (tracker_events + events).each do |event| %><%= event.write %>,<% end %>);
+<% if turbo_event? %>
+  });
+<% end %>
 </script>
 <% end %>

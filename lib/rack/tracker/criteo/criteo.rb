@@ -30,4 +30,9 @@ class Rack::Tracker::Criteo < Rack::Tracker::Handler
   def self.track(name, event_name, event_args = {})
     { name.to_s => [{ 'class_name' => 'Event', 'event' => event_name.to_s.camelize(:lower) }.merge(event_args)] }
   end
+
+  def turbo_event?
+    # TODO: Make this work so we can set eventListeners
+    options[:turbo_event]
+  end
 end
