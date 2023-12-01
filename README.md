@@ -283,11 +283,11 @@ Google Tag manager code snippet supports the container id
   end
 ```
 
-You can also use an experimental feature to track pageviews under turbolinks, which adds a `pageView` event with a `virtualUrl` of the current url.
+You can also use an experimental feature to track pageviews under turbo, which adds a `pageView` event with a `virtualUrl` of the current url.
 
 ```ruby
   config.middleware.use(Rack::Tracker) do
-    handler :google_tag_manager, { container: 'GTM-XXXXXX', turbolinks: true }
+    handler :google_tag_manager, { container: 'GTM-XXXXXX', turbo: true }
   end
 ```
 
