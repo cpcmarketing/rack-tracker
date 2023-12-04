@@ -6,7 +6,7 @@ class Rack::Tracker::FacebookPixel < Rack::Tracker::Handler
     def write
       meta_data = type_to_json
       options.present? ? meta_data << options_to_json : meta_data
-      event.present? ? meta_data << event_to_json : meta_data
+      event_id.present? ? meta_data << event_id_to_json : meta_data
     end
 
     private
@@ -15,8 +15,8 @@ class Rack::Tracker::FacebookPixel < Rack::Tracker::Handler
       type.to_json
     end
 
-    def event_to_json
-      ", #{event.to_json}"
+    def event_id_to_json
+      ", #{event_id.to_json}"
     end
 
     def options_to_json

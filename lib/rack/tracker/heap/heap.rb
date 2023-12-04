@@ -1,8 +1,8 @@
 class Rack::Tracker::Heap < Rack::Tracker::Handler
   class Event < OpenStruct
     def write
-      return if !options.present?
-      options.to_h
+      return if !properties.present?
+      properties.to_h
     end
   end
 
@@ -16,13 +16,13 @@ class Rack::Tracker::Heap < Rack::Tracker::Handler
     end
   end
 
-  class AddUserProperties < Event
+  class AddUser < Event
     def name
       'addUserProperties'
     end
   end
 
-  class AddEventProperties < Event
+  class AddEvent < Event
     def name
       'addEventProperties'
     end
