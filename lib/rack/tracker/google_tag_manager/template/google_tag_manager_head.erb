@@ -1,14 +1,14 @@
 <% if container %>
   <script>
-    dataLayer = [];
-
-    <% if options[:turbolinks] %>
-      document.addEventListener('turbolinks:load', function(event) {
-        var url = event.data.url;
-        dataLayer.push({'event':'pageView','virtualUrl': url});
-      });
+    <% if options[:turbo] %>
       document.addEventListener('turbo:load', function(event) {
-        var url = event.detail.url;
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){dataLayer.push(arguments)};
+        gtag('js', new Date());
+        gtag('config', '<%= container %>');
+
+        const url = event.detail.url;
         dataLayer.push({'event':'pageView','virtualUrl': url});
       });
     <% end %>
@@ -16,7 +16,7 @@
 
   <% if events.any? %>
     <script>
-      <%# Generates unique script tags to ensure that turbo/turbolinks include %>
+      <%# Generates unique script tags to ensure that turbo includes %>
       <%# them in the document even if the same event happens more than once %>
       // Unique Script ID: <%= SecureRandom.base64(8) %>
       dataLayer.push(<%= events.map(&:write).join(', ') %>);

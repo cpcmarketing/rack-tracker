@@ -1,9 +1,6 @@
 require "rack"
 require "tilt"
-require "active_support/core_ext/class/attribute"
-require "active_support/core_ext/hash"
-require "active_support/json"
-require "active_support/inflector"
+require "active_support/all"
 
 require "rack/tracker/version"
 require "rack/tracker/extensions"

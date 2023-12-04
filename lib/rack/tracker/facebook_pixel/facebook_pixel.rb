@@ -4,7 +4,9 @@ class Rack::Tracker::FacebookPixel < Rack::Tracker::Handler
 
   class Event < OpenStruct
     def write
-      options.present? ? type_to_json << options_to_json : type_to_json
+      meta_data = type_to_json
+      options.present? ? meta_data << options_to_json : meta_data
+      event_id.present? ? meta_data << event_id_to_json : meta_data
     end
 
     private
@@ -13,8 +15,18 @@ class Rack::Tracker::FacebookPixel < Rack::Tracker::Handler
       type.to_json
     end
 
+    def event_id_to_json
+      ", #{event_id.to_json}"
+    end
+
     def options_to_json
       ", #{options.to_json}"
+    end
+  end
+
+  class Init < Event
+    def name
+      'init'
     end
   end
 
