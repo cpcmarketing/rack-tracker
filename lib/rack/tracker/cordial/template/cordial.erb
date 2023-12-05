@@ -1,0 +1,39 @@
+<% if Rails.env.production? %>
+  <script data-turbo-eval="false">
+    (function(C,O,R,D,I,A,L){
+      C.CordialObject=I,C[I]=C[I]||function(){(C[I].q=C[I].q||[]).push(arguments)};
+      C[I].l=1*new Date,C[I].q=[],A=O.createElement(R);
+      L=O.getElementsByTagName(R)[0],A.async=1,A.src=D,L.parentNode.insertBefore(A,L);
+    })(window, document, "script", "//d.p.billdoctor.org/track.v2.js", "crdl");
+
+    crdl("connect", "bill_doctor", {
+        trackUrl: "se.p.billdoctor.org",
+        connectUrl: "d.p.billdoctor.org",
+        cookieDomain: "p.billdoctor.org",
+        cookieLife: 365
+    });
+  </script>
+<% else %>
+  <script data-turbo-eval="false">
+    (function(C,O,R,D,I,A,L){
+      C.CordialObject=I,C[I]=C[I]||function(){(C[I].q=C[I].q||[]).push(arguments)};
+      C[I].l=1*new Date,C[I].q=[],A=O.createElement(R);
+      L=O.getElementsByTagName(R)[0],A.async=1,A.src=D,L.parentNode.insertBefore(A,L);
+    })(window, document, "script", "//track.usw2.cordial.com/track.v2.js", "crdl");
+
+    crdl("connect", "bill_doctor-sandbox", {
+        trackUrl: "//track-ehs-svc.usw2.cordial.com",
+        connectUrl: "//track.usw2.cordial.com",
+        cookieDomain: "cordial.com",
+        cookieLife: 365
+    });
+  </script>
+<% end %>
+
+<% if events.any? %>
+  <script type="text/javascript">
+    <% events.each do |event| %>
+      fbq("<%= event.name %>", <%= event.write %>);
+    <% end %>
+  </script>
+<% end %>

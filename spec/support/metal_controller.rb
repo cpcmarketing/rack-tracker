@@ -140,4 +140,8 @@ class MetalController < ActionController::Metal
   def impact
     render "metal/index"
   end
+
+  def cordial
+    render "metal/index"
+  end
 end

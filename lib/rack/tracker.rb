@@ -26,6 +26,7 @@ require "rack/tracker/drift/drift"
 require "rack/tracker/heap/heap"
 require "rack/tracker/tiktok_pixel/tiktok_pixel"
 require "rack/tracker/impact/impact"
+require "rack/tracker/cordial/cordial"
 
 module Rack
   class Tracker
