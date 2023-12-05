@@ -136,4 +136,8 @@ class MetalController < ActionController::Metal
   def tiktok_pixel
     render "metal/index"
   end
+
+  def impact
+    render "metal/index"
+  end
 end
