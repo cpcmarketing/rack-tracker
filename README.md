@@ -1,3 +1,6 @@
+# This is for a proof-of-concept implementation of rack-tracker for our BillDoctor repo.
+[Proof-of-concept PR here](https://github.com/cpcmarketing/billdoctor-web/pull/1404)
+
 # Rack::Tracker
 
 [![Code Climate](https://codeclimate.com/github/railslove/rack-tracker/badges/gpa.svg)](https://codeclimate.com/github/railslove/rack-tracker) [![Build Status](https://travis-ci.org/railslove/rack-tracker.svg?branch=master)](https://travis-ci.org/railslove/rack-tracker)
