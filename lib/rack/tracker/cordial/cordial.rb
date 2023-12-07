@@ -1,44 +1,37 @@
 class Rack::Tracker::Cordial < Rack::Tracker::Handler
-  self.position = :body
-  self.allowed_tracker_options = [:id]
-
   class Event < OpenStruct
     def write
-      meta_data = type_to_json
-      options.present? ? meta_data << options_to_json : meta_data
-      event_id.present? ? meta_data << event_id_to_json : meta_data
+      meta_data = action_name.present? ? action_name_to_json : ""
+      properties.present?  ? meta_data << properties_to_json : meta_data
     end
 
-    private
-
-    def type_to_json
-      type.to_json
+    def action_name_to_json
+      "#{action_name.to_json}, "
     end
 
-    def event_id_to_json
-      ", #{event_id.to_json}"
-    end
-
-    def options_to_json
-      ", #{options.to_json}"
+    def properties_to_json
+      # TODO: Set this up so we can pass in JavaScript variable names
+      # Currently, we can only pass in strings since we're using to_json
+      # Ex: crdl("event", "NPSSubmit", {"cookie_id":"8ded0052-4668-4b57-9e14-bd8501678f92","email":null,"first_name":null,"rating":"e.detail.recommendation_rating.value"});
+      props = properties.to_json
     end
   end
 
-  class Init < Event
+  class Connect < Event
     def name
-      'init'
+      'connect'
     end
   end
 
-  class Track < Event
+  class Contact < Event
     def name
-      'track'
+      'contact'
     end
   end
 
-  class TrackCustom < Event
+  class CustomEvent < Event
     def name
-      'trackCustom'
+      'event'
     end
   end
 end

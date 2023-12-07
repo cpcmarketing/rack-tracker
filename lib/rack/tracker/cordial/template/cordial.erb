@@ -33,7 +33,13 @@
 <% if events.any? %>
   <script type="text/javascript">
     <% events.each do |event| %>
-      fbq("<%= event.name %>", <%= event.write %>);
+      <% if event.event_listener.present? %>
+        document.addEventListener("<%= event.event_listener %>", function(e) {
+      <% end %>
+          crdl("<%= event.name %>", <%= event.write %>);
+      <% if event.event_listener.present? %>
+        });
+      <% end %>
     <% end %>
   </script>
 <% end %>
