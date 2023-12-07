@@ -10,8 +10,7 @@ class Rack::Tracker::Cordial < Rack::Tracker::Handler
     end
 
     def properties_to_json
-      # TODO: Set this up so we can pass in JavaScript variable names
-      # Currently, we can only pass in strings since we're using to_json
+      # TODO: Set this up so we can pass in JavaScript variable names. Currently, we can only pass in strings since we're using to_json.
       # Ex: crdl("event", "NPSSubmit", {"cookie_id":"8ded0052-4668-4b57-9e14-bd8501678f92","email":null,"first_name":null,"rating":"e.detail.recommendation_rating.value"});
       props = properties.to_json
     end
@@ -26,6 +25,10 @@ class Rack::Tracker::Cordial < Rack::Tracker::Handler
   class Contact < Event
     def name
       'contact'
+    end
+
+    def write
+      "#{auth_data.to_json}, #{contact_data.to_json}"
     end
   end
 
