@@ -1,34 +1,32 @@
-<% if container %>
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','<%= options[:tag_manager_id] %>');</script>
+
+<% if options[:universal_analytics_id] %>
   <script>
-    <% if options[:turbo] %>
-      document.addEventListener('turbo:load', function(event) {
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag(){dataLayer.push(arguments)};
-        gtag('js', new Date());
-        gtag('config', '<%= container %>');
-
-        const url = event.detail.url;
-        dataLayer.push({'event':'pageView','virtualUrl': url});
-      });
-    <% end %>
+    document.addEventListener(
+			'turbo:load',
+			(e) => {
+				window.dataLayer = window.dataLayer || [];
+				function gtag(_, ...args) {
+					window.dataLayer.push(args);
+				}
+				gtag('js', new Date());
+				gtag('config', '<%= options[:universal_analytics_id] %>', { page_location: e.detail.url });
+			},
+			false,
+		);
   </script>
-
-  <% if events.any? %>
-    <script>
-      <%# Generates unique script tags to ensure that turbo includes %>
-      <%# them in the document even if the same event happens more than once %>
-      // Unique Script ID: <%= SecureRandom.base64(8) %>
-      dataLayer.push(<%= events.map(&:write).join(', ') %>);
-    </script>
-  <% end %>
-
-  <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','<%= container %>');</script>
 <% end %>
 
-
+<% if events.any? %>
+  <script>
+    <%# Generates unique script tags to ensure that turbo includes %>
+    <%# them in the document even if the same event happens more than once %>
+    // Unique Script ID: <%= SecureRandom.base64(8) %>
+    dataLayer.push(<%= events.map(&:write).join(', ') %>);
+  </script>
+<% end %>
