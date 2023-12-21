@@ -27,6 +27,7 @@ require "rack/tracker/heap/heap"
 require "rack/tracker/tiktok_pixel/tiktok_pixel"
 require "rack/tracker/impact/impact"
 require "rack/tracker/cordial/cordial"
+require "rack/tracker/braze/braze"
 
 module Rack
   class Tracker

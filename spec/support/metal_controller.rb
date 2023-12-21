@@ -143,5 +143,9 @@ class MetalController < ActionController::Metal
 
   def cordial
     render "metal/index"
+  end 
+  
+  def braze
+    render "metal/index"
   end
 end
