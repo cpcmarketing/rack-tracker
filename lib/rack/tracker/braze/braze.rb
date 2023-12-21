@@ -1,13 +1,6 @@
 class Rack::Tracker::Braze < Rack::Tracker::Handler
   class Event < OpenStruct
-    def write
-      meta_data = ""
-      properties.present?  ? meta_data << properties_to_json : meta_data
-    end
-
-    def properties_to_json
-      props = properties.to_json
-    end
+    def write; end
   end
 
   class AutomaticallyShowInAppMessages < Event
