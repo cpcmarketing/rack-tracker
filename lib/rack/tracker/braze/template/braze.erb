@@ -17,7 +17,7 @@
         <% if event.write.kind_of?(String) %>
           "<%= event.write %>"
         <% else %>
-          <%= event.write.to_json %>
+          <%= event.write %>
         <% end %>
       );
     <% end %>
