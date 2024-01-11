@@ -15,7 +15,7 @@ class Rack::Tracker::Braze < Rack::Tracker::Handler
     end
 
     def write
-      "#{user_external_id.to_json}"
+      "#{user_id.to_s}"
     end
   end
 

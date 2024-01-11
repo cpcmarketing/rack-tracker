@@ -6,14 +6,20 @@
 
   // initialize the SDK
   braze.initialize('<%= options[:api_key] %>', {
-    baseUrl: '<%= options[:sdk_endpoint_url] %>'
+    baseUrl: '<%= options[:sdk_endpoint] %>'
   });
 </script>
 
 <% if events.any? %>
   <script type="text/javascript">
     <% events.each do |event| %>
-      braze.<%= event.name %>(<%= event.write %>);
+      braze.<%= event.name %>(
+        <% if event.write.kind_of?(String) %>
+          "<%= event.write %>"
+        <% else %>
+          <%= event.write.to_json %>
+        <% end %>
+      );
     <% end %>
   </script>
 <% end %>
