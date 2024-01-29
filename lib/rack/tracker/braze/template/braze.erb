@@ -6,7 +6,8 @@
 
   // initialize the SDK
   braze.initialize('<%= options[:api_key] %>', {
-    baseUrl: '<%= options[:sdk_endpoint] %>'
+    baseUrl: '<%= options[:sdk_endpoint] %>',
+    doNotLoadFontAwesome: true,
   });
 </script>
 
@@ -14,11 +15,7 @@
   <script type="text/javascript">
     <% events.each do |event| %>
       braze.<%= event.name %>(
-        <% if event.write.kind_of?(String) %>
-          "<%= event.write %>"
-        <% else %>
-          <%= event.write %>
-        <% end %>
+        <%= event.write %>
       );
     <% end %>
   </script>

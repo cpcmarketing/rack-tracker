@@ -15,7 +15,17 @@ class Rack::Tracker::Braze < Rack::Tracker::Handler
     end
 
     def write
-      "#{user_id.to_s}"
+      user_id.to_json
+    end
+  end
+
+  class LogCustomEvent < Event
+    def name
+      'logCustomEvent'
+    end
+
+    def write
+      event_name.to_json << ", #{properties.to_json}"
     end
   end
 
